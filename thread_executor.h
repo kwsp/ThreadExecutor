@@ -1,16 +1,14 @@
+#pragma once
+
 #include <queue>
 #include <thread>
-
-#include <iostream>
 
 class ThreadExecutor {
 public:
   ThreadExecutor(int N_THREADS = std::thread::hardware_concurrency())
       : _N_THREADS(N_THREADS) {}
 
-  ~ThreadExecutor() {
-    join();
-  }
+  ~ThreadExecutor() { join(); }
 
   template <class Function, class... Args>
   void run(Function &&f, Args &&...args) {
@@ -34,4 +32,3 @@ private:
   std::queue<std::thread> _threads;
   int _N_THREADS;
 };
-
